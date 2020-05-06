@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 10
+Implementation-Title: login-registration-springboot-hibernate-jsp-auth
+  Maven Webapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Created-By: Maven Integration for Eclipse
+
