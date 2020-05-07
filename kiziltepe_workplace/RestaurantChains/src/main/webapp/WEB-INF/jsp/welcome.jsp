@@ -21,8 +21,8 @@
 
 
 </head>
-<body>
-<img src="images/header.jpg" alt="background">
+<body class="homebg">
+	<div></div>
 	<div class="container">
 
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -31,11 +31,11 @@
 					value="${_csrf.token}" />
 			</form>
 
-			<h4 class="welcomelogout">
+			<h3 class="welcomelogout">
 				Welcome ${pageContext.request.userPrincipal.name} | <a
 					onclick="document.forms['logoutForm'].submit()">Logout</a> <a
 					href="/edit_profile"></a>
-			</h4>
+			</h3>
 
 		</c:if>
 
@@ -72,29 +72,31 @@
 			</tr>
 		</table>
 	</div>
+	<c:if test="${pageContext.request.isUserInRole('OWNER')}">
 
-	<div>
-		<table>
-			<tr>
-				<td>
-					<h2>My Restaurants</h2>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table>
-						<tr>
-							<td>
-								<form action="/owner/view_restaurant">
-									<input type="hidden" name="name"
-										value="${pageContext.request.userPrincipal.name}"> <input
-										type="submit" value="My Restaurant">
-								</form>
-							</td>
-						</tr>
-					</table>
-		</table>
-	</div>
+		<div>
+			<table>
+				<tr>
+					<td>
+						<h2>My Restaurants</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td>
+									<form action="/owner/view_restaurant">
+										<input type="hidden" name="name"
+											value="${pageContext.request.userPrincipal.name}"> <input
+											type="submit" value="My Restaurant">
+									</form>
+								</td>
+							</tr>
+						</table>
+			</table>
+		</div>
+	</c:if>
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
