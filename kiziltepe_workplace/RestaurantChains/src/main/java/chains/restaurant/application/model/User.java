@@ -20,7 +20,7 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "user_role")
 	private Set<Role> roles;
-	private HashSet<Item> shoppingCart;
+	private HashSet<Long> shoppingCart;
 	
 	private Restaurant myRestaurant;
 
@@ -59,11 +59,11 @@ public class User {
 		this.passwordConfirm = passwordConfirm;
 	}
 
-	public HashSet<Item> getShoppingCart() {
+	public HashSet<Long> getShoppingCart() {
 		return shoppingCart;
 	}
 
-	public void setShoppingCart(HashSet<Item> shoppingCart) {
+	public void setShoppingCart(HashSet<Long> shoppingCart) {
 		this.shoppingCart = shoppingCart;
 	}	
 

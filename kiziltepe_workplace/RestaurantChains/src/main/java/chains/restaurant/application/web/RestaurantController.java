@@ -1,5 +1,7 @@
 package chains.restaurant.application.web;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,9 +40,8 @@ public class RestaurantController {
 		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
         String restaurantName = userRepository.findByUsername(name).getMyRestaurant().getName();
         Restaurant restaurant = restaurantRepository.findByName(restaurantName);
-        Iterable<Item> itemList = restaurant.getMenu();
 		mav.addObject("restaurant", restaurant);
-		mav.addObject("itemList", itemList);
+		getItemList(mav, restaurant);
 		return mav;
 	}
 
@@ -53,6 +54,7 @@ public class RestaurantController {
 			restaurantRepository.saveAndFlush(restaurant);
 		}
 		mav.addObject("restaurant", restaurant);
+		getItemList(mav, restaurant);
 		return mav;
 	}
 
@@ -65,6 +67,7 @@ public class RestaurantController {
 			restaurantRepository.saveAndFlush(restaurant);
 		}
 		mav.addObject("restaurant", restaurant);
+		getItemList(mav, restaurant);
 		return mav;
 	}
 
@@ -73,14 +76,11 @@ public class RestaurantController {
 			@RequestParam String newName) {
 		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(name);
-		if (restaurant.getMenu().contains(itemRepository.findByName(oldName))) {
-			Item newItem = itemRepository.findByName(oldName);
-			newItem.setName(newName);
-			restaurant.getMenu().remove(itemRepository.findByName(oldName));
-			restaurant.getMenu().add(newItem);
-			restaurantRepository.saveAndFlush(restaurant);
+		if (restaurant.getMenu().contains(oldName)) {
+
 		}
 		mav.addObject("restaurant", restaurant);
+		getItemList(mav, restaurant);
 		return mav;
 	}
 
@@ -89,14 +89,11 @@ public class RestaurantController {
 			@RequestParam String newName) {
 		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(name);
-		if (restaurant.getMenu().contains(itemRepository.findByName(oldName))) {
-			Item newItem = itemRepository.findByName(oldName);
-			newItem.setDescription(newName);
-			restaurant.getMenu().remove(itemRepository.findByName(oldName));
-			restaurant.getMenu().add(newItem);
-			restaurantRepository.saveAndFlush(restaurant);
+		if (restaurant.getMenu().contains(oldName)) {
+
 		}
 		mav.addObject("restaurant", restaurant);
+		getItemList(mav, restaurant);
 		return mav;
 	}
 
@@ -105,14 +102,11 @@ public class RestaurantController {
 			@RequestParam int newPrice) {
 		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(name);
-		if (restaurant.getMenu().contains(itemRepository.findByName(oldName))) {
-			Item newItem = itemRepository.findByName(oldName);
-			newItem.setPrice(newPrice);
-			restaurant.getMenu().remove(itemRepository.findByName(oldName));
-			restaurant.getMenu().add(newItem);
-			restaurantRepository.saveAndFlush(restaurant);
+		if (restaurant.getMenu().contains(oldName)) {
+
 		}
 		mav.addObject("restaurant", restaurant);
+		getItemList(mav, restaurant);
 		return mav;
 	}
 
@@ -120,11 +114,23 @@ public class RestaurantController {
 	public ModelAndView addRestaurantItem(@RequestParam String restaurantName, Item item) {
 		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(restaurantName);
-		itemRepository.save(item);
-		restaurant.getMenu().add(itemRepository.findByName(item.getName()));
+		itemRepository.saveAndFlush(item);
+		restaurant.getMenu().add(item.getId());
 		restaurantRepository.saveAndFlush(restaurant);
 		mav.addObject("restaurant", restaurant);
+		getItemList(mav, restaurant);
 		return mav;
+	}
+	
+	public void getItemList(ModelAndView mav, Restaurant restaurant) {
+        ArrayList<Item> items = new ArrayList<Item>();
+        for(Item item : itemRepository.findAll()) {
+        	if(restaurant.getMenu().contains(item.getId())) {
+        		items.add(item);
+        	}
+        }
+        Iterable<Item> itemList = items;
+		mav.addObject("itemList", itemList);
 	}
 
 }

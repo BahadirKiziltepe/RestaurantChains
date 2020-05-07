@@ -3,11 +3,14 @@ package chains.restaurant.application.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -34,13 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 	}
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("user999").password(bCryptPasswordEncoder().encode("999999999"))
-				.roles("USER").and().withUser("owner111").password(bCryptPasswordEncoder().encode("111111111"))
-				.roles("USER", "OWNER").and().withUser("admin000").password(bCryptPasswordEncoder().encode("000000000"))
-				.roles("USER", "OWNER", "ADMIN");
-	}
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.inMemoryAuthentication().withUser("user999").password(bCryptPasswordEncoder().encode("999999999"))
+//				.roles("USER").and().withUser("owner111").password(bCryptPasswordEncoder().encode("111111111"))
+//				.roles("USER", "OWNER").and().withUser("admin000").password(bCryptPasswordEncoder().encode("000000000"))
+//				.roles("USER", "OWNER", "ADMIN");
+//	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

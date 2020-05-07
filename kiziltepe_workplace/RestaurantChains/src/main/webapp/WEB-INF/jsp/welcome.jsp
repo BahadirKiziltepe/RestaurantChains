@@ -60,7 +60,7 @@
 								<td><form action="/view_restaurant">
 										<table>
 											<tr>
-												<td><input type="hidden" name="name"
+												<td><input type="hidden" name="id"
 													value="${restaurant.name}"></td>
 												<td><input type="submit" value="${restaurant.name}"></td>
 											</tr>

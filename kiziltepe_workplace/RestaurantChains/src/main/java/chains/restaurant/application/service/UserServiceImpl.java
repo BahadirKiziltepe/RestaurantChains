@@ -1,6 +1,8 @@
 package chains.restaurant.application.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,13 +31,14 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setRoles(new HashSet<>());
 		user.getRoles().add(roleRepository.findById(9));
-		user.setShoppingCart(new HashSet<Item>());
+		user.setShoppingCart(new HashSet<Long>());
 		if(user.getIsOwner()) {
 			user.getRoles().add(roleRepository.findById(1));
 			Restaurant restaurant = new Restaurant();
 			restaurantRepository.save(restaurant);
 			restaurant.setName(Long.toString(restaurant.getId()));
-			restaurant.setMenu(new HashSet<Item>());
+			restaurant.setMenu(new HashSet<Long>());
+			restaurantRepository.saveAndFlush(restaurant);
 			user.setMyRestaurant(restaurant);
 		}
 		userRepository.save(user);

@@ -78,7 +78,7 @@
 				<input type="hidden" name="restaurantName" value="${restaurant.name}">
 				<input type="text" name="name" placeholder="Name">
 				<input type="text" name="description" placeholder="Description">
-				<input type="number" name="price" placeholder="Price">
+				<input type="number" step="0.01" name="price" placeholder="Price">
 				<input type="submit" value="Add Item">
 				</form></td>
 		</tr>

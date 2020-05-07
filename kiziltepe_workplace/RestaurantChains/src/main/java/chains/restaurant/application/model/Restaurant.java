@@ -15,7 +15,8 @@ public class Restaurant {
 	private Long id;
 	private String name;
 	private String address;
-	private HashSet<Item> menu;
+
+	private HashSet<Long> menu;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,11 +44,11 @@ public class Restaurant {
 		this.address = address;
 	}
 
-	public HashSet<Item> getMenu() {
+	public HashSet<Long> getMenu() {
 		return menu;
 	}
 
-	public void setMenu(HashSet<Item> menu) {
+	public void setMenu(HashSet<Long> menu) {
 		this.menu = menu;
 	}
 }
