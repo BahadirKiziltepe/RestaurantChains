@@ -1869,6 +1869,7 @@ pre code {
 
 .homebg {
 	background-image: url("../image/header.jpg");
+	height: 600px;
 }
 
 @media ( min-width : 768px) {

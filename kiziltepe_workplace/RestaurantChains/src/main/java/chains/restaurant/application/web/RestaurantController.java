@@ -11,6 +11,7 @@ import chains.restaurant.application.model.Item;
 import chains.restaurant.application.model.Restaurant;
 import chains.restaurant.application.repository.ItemRepository;
 import chains.restaurant.application.repository.RestaurantRepository;
+import chains.restaurant.application.repository.UserRepository;
 
 @Controller
 public class RestaurantController {
@@ -20,6 +21,9 @@ public class RestaurantController {
 
 	@Autowired
 	private ItemRepository itemRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@RequestMapping(value = "/admin/view_restaurants", method = RequestMethod.GET)
 	public ModelAndView viewRestaurants() {
@@ -31,8 +35,9 @@ public class RestaurantController {
 
 	@RequestMapping(value = "/owner/view_restaurant", method = RequestMethod.GET)
 	public ModelAndView viewRestaurant(@RequestParam String name) {
-		ModelAndView mav = new ModelAndView("viewRestaurant");
-		Restaurant restaurant = restaurantRepository.findByName(name);
+		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
+        String restaurantName = userRepository.findByUsername(name).getMyRestaurant().getName();
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName);
 		mav.addObject("restaurant", restaurant);
 		return mav;
 	}

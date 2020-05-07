@@ -21,7 +21,8 @@
 
 
 </head>
-<body class="homebg">
+<body>
+<img src="images/header.jpg" alt="background">
 	<div class="container">
 
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -32,18 +33,19 @@
 
 			<h4 class="welcomelogout">
 				Welcome ${pageContext.request.userPrincipal.name} | <a
-					onclick="document.forms['logoutForm'].submit()">Logout</a>
-					<a href="/edit_profile"></a>
+					onclick="document.forms['logoutForm'].submit()">Logout</a> <a
+					href="/edit_profile"></a>
 			</h4>
 
 		</c:if>
 
 	</div>
 
-	<div class="role_admin">
-		<a href="${contextPath}/h2-console">CONSOLE</a>
-	</div>
-
+	<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
+		<div>
+			<a href="${contextPath}/h2-console">CONSOLE</a>
+		</div>
+	</c:if>
 	<div>
 		<table>
 			<tr>
@@ -68,6 +70,29 @@
 						</table>
 					</c:forEach></td>
 			</tr>
+		</table>
+	</div>
+
+	<div>
+		<table>
+			<tr>
+				<td>
+					<h2>My Restaurants</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<td>
+								<form action="/owner/view_restaurant">
+									<input type="hidden" name="name"
+										value="${pageContext.request.userPrincipal.name}"> <input
+										type="submit" value="My Restaurant">
+								</form>
+							</td>
+						</tr>
+					</table>
 		</table>
 	</div>
 	<!-- /container -->

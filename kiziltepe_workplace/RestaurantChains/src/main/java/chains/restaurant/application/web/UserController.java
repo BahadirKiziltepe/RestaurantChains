@@ -7,11 +7,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import chains.restaurant.application.model.Restaurant;
+import chains.restaurant.application.model.Role;
 import chains.restaurant.application.model.User;
 import chains.restaurant.application.repository.RestaurantRepository;
+import chains.restaurant.application.repository.UserRepository;
 import chains.restaurant.application.service.UserService;
 import chains.restaurant.application.validator.UserValidator;
 
@@ -25,6 +28,9 @@ public class UserController {
     
     @Autowired
     private RestaurantRepository restaurantRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {

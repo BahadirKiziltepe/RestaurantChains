@@ -23,7 +23,7 @@
 
 </head>
 <body>
-
+<h2>Owner ${pageContext.request.userPrincipal.name}</h2>
 	<table>
 		<tr>
 
