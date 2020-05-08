@@ -40,6 +40,14 @@ public class RestaurantController {
 		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
         String restaurantName = userRepository.findByUsername(name).getMyRestaurant().getName();
         Restaurant restaurant = restaurantRepository.findByName(restaurantName);
+        for(Long item : restaurant.getMenu()) {
+        	if(itemRepository.existsById(item)) {
+        		; //nop
+        	} else {
+        		restaurant.getMenu().remove(item);
+        		restaurantRepository.saveAndFlush(restaurant);
+        	}
+        }
 		mav.addObject("restaurant", restaurant);
 		getItemList(mav, restaurant);
 		return mav;
@@ -132,5 +140,4 @@ public class RestaurantController {
         Iterable<Item> itemList = items;
 		mav.addObject("itemList", itemList);
 	}
-
 }

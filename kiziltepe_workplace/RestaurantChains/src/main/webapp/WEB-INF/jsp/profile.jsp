@@ -22,7 +22,6 @@
 
 </head>
 <body class="homebg">
-
 	<div class="container">
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
 			<form id="logoutForm" method="POST" action="${contextPath}/logout">
@@ -30,7 +29,7 @@
 					value="${_csrf.token}" />
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/profile">My Account</a> |
+				| <a href="/welcome">Home</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
 					<a href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
@@ -39,57 +38,7 @@
 		</c:if>
 	</div>
 
-	<div>
-		<table>
-			<tr>
-				<td>
-					<h2>Restaurants</h2>
-				</td>
-			</tr>
-			<tr>
-				<td><c:forEach var="restaurant" items="${restaurantList}">
-						<table>
-							<tr>
-								<td><form action="/view_restaurant">
-										<table>
-											<tr>
-												<td><input type="hidden" name="name"
-													value="${restaurant.name}"></td>
-												<td><input type="submit" value="${restaurant.name}"></td>
-											</tr>
-										</table>
-									</form></td>
-							</tr>
-						</table>
-					</c:forEach></td>
-			</tr>
-		</table>
-	</div>
-	<c:if test="${pageContext.request.isUserInRole('OWNER')}">
-
-		<div>
-			<table>
-				<tr>
-					<td>
-						<h2>My Restaurants</h2>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table>
-							<tr>
-								<td>
-									<form action="/owner/view_restaurant">
-										<input type="hidden" name="name"
-											value="${pageContext.request.userPrincipal.name}"> <input
-											type="submit" value="My Restaurant">
-									</form>
-								</td>
-							</tr>
-						</table>
-			</table>
-		</div>
-	</c:if>
+	<div></div>
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

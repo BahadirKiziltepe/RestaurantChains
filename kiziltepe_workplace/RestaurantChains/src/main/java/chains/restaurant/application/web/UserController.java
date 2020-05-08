@@ -84,10 +84,24 @@ public class UserController {
     }
 
     @RequestMapping(value = {"", "/","/welcome"}, method = RequestMethod.GET)
-    public ModelAndView welcome(Model model) {
+    public ModelAndView welcome() {
     	ModelAndView mav = new ModelAndView("welcome");
     	Iterable<Restaurant> restaurantList = restaurantRepository.findAll();
     	mav.addObject("restaurantList", restaurantList);
+        return mav;
+    }
+    
+    @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
+    public ModelAndView profile() {
+    	ModelAndView mav = new ModelAndView("profile");
+        return mav;
+    }
+    
+    @RequestMapping(value = {"/view_restaurant"}, method = RequestMethod.GET)
+    public ModelAndView viewRestaurant(@RequestParam String name) {
+    	ModelAndView mav = new ModelAndView("viewRestaurantForUser");
+    	Restaurant restaurant = restaurantRepository.findByName(name);
+    	mav.addObject("restaurant", restaurant);
         return mav;
     }
 }

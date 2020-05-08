@@ -23,7 +23,23 @@
 
 
 </head>
-<body>
+<body class="homebg">
+	<div class="container">
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<form id="logoutForm" method="POST" action="${contextPath}/logout">
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+			</form>
+			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
+				| <a href="/profile">My Account</a> |
+				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
+					<a href="${contextPath}/h2-console">CONSOLE</a> |
+				</c:if>
+				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
+			</h3>
+		</c:if>
+	</div>
+
 	<h2>Owner ${pageContext.request.userPrincipal.name}</h2>
 	<table>
 		<tr>
@@ -65,9 +81,7 @@
 							<td><form action="/view_restaurant">
 									<table>
 										<tr>
-											<td><input type="hidden" name="name"
-												value="${item.name}"></td>
-											<td><input type="submit" value="${item.name}"></td>
+											<td><h4>${item.name} - ${item.description}</h4></td>
 										</tr>
 									</table>
 								</form></td>
@@ -75,11 +89,12 @@
 					</table>
 				</c:forEach>
 				<form action="/owner/edit_restaurant_add_item">
-				<input type="hidden" name="restaurantName" value="${restaurant.name}">
-				<input type="text" name="name" placeholder="Name">
-				<input type="text" name="description" placeholder="Description">
-				<input type="number" step="0.01" name="price" placeholder="Price">
-				<input type="submit" value="Add Item">
+					<input type="hidden" name="restaurantName"
+						value="${restaurant.name}"> <input type="text" name="name"
+						placeholder="Name"> <input type="text" name="description"
+						placeholder="Description"> <input type="number"
+						step="0.01" name="price" placeholder="Price"> <input
+						type="submit" value="Add Item">
 				</form></td>
 		</tr>
 	</table>

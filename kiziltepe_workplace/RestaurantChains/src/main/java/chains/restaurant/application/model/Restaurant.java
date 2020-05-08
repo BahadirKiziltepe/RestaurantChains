@@ -17,6 +17,7 @@ public class Restaurant {
 	private String address;
 
 	private HashSet<Long> menu;
+	private HashSet<Long> orders;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,5 +51,13 @@ public class Restaurant {
 
 	public void setMenu(HashSet<Long> menu) {
 		this.menu = menu;
+	}
+
+	public HashSet<Long> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(HashSet<Long> orders) {
+		this.orders = orders;
 	}
 }

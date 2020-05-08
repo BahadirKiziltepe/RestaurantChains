@@ -1,0 +1,6 @@
+2020-05-07 21:26:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "MENU VARBINARY(255)": "X'aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770c000000103f4000000000000a7372000e6a6176612e6c61... (257)"; SQL statement:
+update restaurant set address=?, menu=?, name=?, orders=? where id=? [22001-200]
+2020-05-07 21:26:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "MENU VARBINARY(255)": "X'aced0005737200116a6176612e7574696c2e48617368536574ba44859596b8b7340300007870770c000000103f4000000000000a7372000e6a6176612e6c61... (257)"; SQL statement:
+update restaurant set address=?, menu=?, name=?, orders=? where id=? [22001-200]

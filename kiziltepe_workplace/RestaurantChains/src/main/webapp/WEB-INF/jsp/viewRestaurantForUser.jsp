@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="chains.restaurant.application.model.Restaurant"%>
+<%@ page import="chains.restaurant.application.model.Item"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -22,28 +23,29 @@
 
 
 </head>
-<body>
+<body class="homebg">
+	<div class="container">
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<form id="logoutForm" method="POST" action="${contextPath}/logout">
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+			</form>
+			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
+				| <a href="/profile">My Account</a> |
+				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
+					<a href="${contextPath}/h2-console">CONSOLE</a> |
+				</c:if>
+				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
+			</h3>
+		</c:if>
+	</div>
 
+	<h2>${pageContext.request.userPrincipal.name}</h2>
 	<table>
 		<tr>
 
-			<td>Name = ${restaurant.name}, ID = ${restaurant.id}, Address =
-				${restaurant.address}</td>
+			<td><h4>Name = ${restaurant.name}, Address = ${restaurant.address}</h4></td>
 
-		</tr>
-	</table>
-	<table>
-		<tr>
-			<td><form action="/edit_restaurant">
-					<table>
-						<tr>
-						<td><input type="hidden" name="name" value="${restaurant.name}"></td>
-							<td><input type="text" name="newName"
-								placeholder="new name"></td>
-							<td><input type="submit" value="set new name"></td>
-						</tr>
-					</table>
-				</form></td>
 		</tr>
 	</table>
 
