@@ -30,8 +30,8 @@
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 			</form>
-			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/profile">My Account</a> |
+			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name} | <a href="/welcome">Home</a>
+				| <a href="/profile?name=${pageContext.request.userPrincipal.name}">My Account</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
 					<a href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
@@ -39,16 +39,40 @@
 			</h3>
 		</c:if>
 	</div>
+	<div>
+		<h2>${pageContext.request.userPrincipal.name}</h2>
+		<table>
+			<tr>
 
-	<h2>${pageContext.request.userPrincipal.name}</h2>
-	<table>
-		<tr>
-
-			<td><h4>Name = ${restaurant.name}, Address = ${restaurant.address}</h4></td>
-
-		</tr>
-	</table>
-
+				<td><h4>Name = ${restaurant.name}, Address =
+						${restaurant.address}</h4></td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td><c:forEach var="item" items="${itemListRestaurant}">
+						<table>
+							<tr>
+								<td><form action="/view_restaurant/add_item">
+										<table>
+											<tr>
+												<td><input type="hidden" name="name"
+													value="${restaurant.name}"></td>
+													<td><input type="hidden" name="user"
+													value="${pageContext.request.userPrincipal.name}"></td>
+													<td><input type="hidden" name="id"
+													value="${item.id}"></td>
+												<td><h4>${item.name}- ${item.description}</h4></td>
+												<td><input type="submit" value="Add Item"></td>
+											</tr>
+										</table>
+									</form></td>
+							</tr>
+						</table>
+					</c:forEach></td>
+			</tr>
+		</table>
+	</div>
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

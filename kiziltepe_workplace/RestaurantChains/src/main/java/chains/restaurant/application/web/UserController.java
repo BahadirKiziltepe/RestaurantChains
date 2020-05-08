@@ -1,5 +1,8 @@
 package chains.restaurant.application.web;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import chains.restaurant.application.model.Item;
 import chains.restaurant.application.model.Restaurant;
 import chains.restaurant.application.model.Role;
 import chains.restaurant.application.model.User;
+import chains.restaurant.application.repository.ItemRepository;
 import chains.restaurant.application.repository.RestaurantRepository;
 import chains.restaurant.application.repository.UserRepository;
 import chains.restaurant.application.service.UserService;
@@ -31,6 +36,9 @@ public class UserController {
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private ItemRepository itemRepository;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -92,8 +100,15 @@ public class UserController {
     }
     
     @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
-    public ModelAndView profile() {
+    public ModelAndView profile(@RequestParam String name) {
+    	System.out.println(name);
     	ModelAndView mav = new ModelAndView("profile");
+    	User user = userRepository.findByUsername(name);
+    	mav.addObject("user", user);
+    	getItemListForUser(mav, user);
+    	for(Long ids : userRepository.findByUsername(user.getUsername()).getShoppingCart()) {
+    		System.out.println(ids);
+    	}
         return mav;
     }
     
@@ -102,6 +117,45 @@ public class UserController {
     	ModelAndView mav = new ModelAndView("viewRestaurantForUser");
     	Restaurant restaurant = restaurantRepository.findByName(name);
     	mav.addObject("restaurant", restaurant);
+    	getItemListForRestaurant(mav, restaurant);
         return mav;
     }
+    
+    @RequestMapping(value = {"/view_restaurant/add_item"}, method = RequestMethod.GET)
+    public ModelAndView additem(@RequestParam String name, @RequestParam String user, @RequestParam Long id) {
+    	ModelAndView mav = new ModelAndView("viewRestaurantForUser");
+    	Restaurant restaurant = restaurantRepository.findByName(name);
+    	mav.addObject("restaurant", restaurant);
+    	getItemListForRestaurant(mav, restaurant);
+    	userRepository.findByUsername(user).getShoppingCart().add(id);
+        return mav;
+    }
+    
+	public void getItemListForUser(ModelAndView mav, User user) {
+        ArrayList<Item> items = new ArrayList<Item>();
+        for(Long id : user.getShoppingCart()) {
+        	if(itemRepository.existsById(id)) {
+        		Optional<Item> item = itemRepository.findById(id);
+        		items.add(item.get());
+        	} else {
+        		user.getShoppingCart().remove(id);
+        	}
+        }
+        Iterable<Item> itemListUser = items;
+		mav.addObject("itemListUser", itemListUser);
+	}
+	
+	public void getItemListForRestaurant(ModelAndView mav, Restaurant restaurant) {
+        ArrayList<Item> items = new ArrayList<Item>();
+        for(Long id : restaurant.getMenu()) {
+        	if(itemRepository.existsById(id)) {
+        		Optional<Item> item = itemRepository.findById(id);
+        		items.add(item.get());
+        	} else {
+        		restaurant.getMenu().remove(id);
+        	}
+        }
+        Iterable<Item> itemListRestaurant = items;
+		mav.addObject("itemListRestaurant", itemListRestaurant);
+	}
 }

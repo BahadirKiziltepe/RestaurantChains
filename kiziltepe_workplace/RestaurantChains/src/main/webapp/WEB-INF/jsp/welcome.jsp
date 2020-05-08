@@ -30,9 +30,9 @@
 					value="${_csrf.token}" />
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/profile">My Account</a> |
+				| <a href="/profile?name=${pageContext.request.userPrincipal.name}">My Account</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
-					<a href="${contextPath}/h2-console">CONSOLE</a> |
+					<a  href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
 				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
 			</h3>

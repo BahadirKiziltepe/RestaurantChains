@@ -38,7 +38,29 @@
 		</c:if>
 	</div>
 
-	<div></div>
+	<div>
+		<h4>ID: ${user.id}</h4>
+		<h4>Username: ${user.username}</h4>
+		<h4>Name: ${user.name}</h4>
+		<h4>Address: ${user.address}</h4>
+		<h4>Credit Card: ${user.creditCard}</h4>
+	</div>
+
+	<div>
+		<c:forEach var="item" items="${itemListUser}">
+			<table>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td><h4>${item.name} - ${item.description}</h4></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</c:forEach>
+	</div>
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

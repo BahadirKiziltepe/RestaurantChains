@@ -1,6 +1,7 @@
 package chains.restaurant.application.web;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,14 +41,6 @@ public class RestaurantController {
 		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
         String restaurantName = userRepository.findByUsername(name).getMyRestaurant().getName();
         Restaurant restaurant = restaurantRepository.findByName(restaurantName);
-        for(Long item : restaurant.getMenu()) {
-        	if(itemRepository.existsById(item)) {
-        		; //nop
-        	} else {
-        		restaurant.getMenu().remove(item);
-        		restaurantRepository.saveAndFlush(restaurant);
-        	}
-        }
 		mav.addObject("restaurant", restaurant);
 		getItemList(mav, restaurant);
 		return mav;
@@ -132,9 +125,12 @@ public class RestaurantController {
 	
 	public void getItemList(ModelAndView mav, Restaurant restaurant) {
         ArrayList<Item> items = new ArrayList<Item>();
-        for(Item item : itemRepository.findAll()) {
-        	if(restaurant.getMenu().contains(item.getId())) {
-        		items.add(item);
+        for(Long id : restaurant.getMenu()) {
+        	if(itemRepository.existsById(id)) {
+        		Optional<Item> item = itemRepository.findById(id);
+        		items.add(item.get());
+        	} else {
+        		restaurant.getMenu().remove(id);
         	}
         }
         Iterable<Item> itemList = items;

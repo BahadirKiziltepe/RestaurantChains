@@ -30,8 +30,8 @@
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 			</form>
-			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/profile">My Account</a> |
+			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name} | <a href="/welcome">Home</a>
+				| <a href="/profile?name=${pageContext.request.userPrincipal.name}">My Account</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
 					<a href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
