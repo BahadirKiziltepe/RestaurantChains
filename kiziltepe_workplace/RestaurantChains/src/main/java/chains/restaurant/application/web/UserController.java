@@ -122,7 +122,7 @@ public class UserController {
     }
     
     @RequestMapping(value = {"/view_restaurant/add_item"}, method = RequestMethod.GET)
-    public ModelAndView additem(@RequestParam String name, @RequestParam String user, @RequestParam Long id) {
+    public ModelAn								dView additem(@RequestParam String name, @RequestParam String user, @RequestParam Long id) {
     	ModelAndView mav = new ModelAndView("viewRestaurantForUser");
     	Restaurant restaurant = restaurantRepository.findByName(name);
     	mav.addObject("restaurant", restaurant);
