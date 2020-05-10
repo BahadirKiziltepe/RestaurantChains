@@ -30,8 +30,12 @@
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 			</form>
-			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name} | <a href="/welcome">Home</a>
-				| <a href="/profile?name=${pageContext.request.userPrincipal.name}">My Account</a> |
+			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
+				| <a href="/welcome">Home</a> | <a
+					href="/profile?name=${pageContext.request.userPrincipal.name}">My
+					Account</a> | <a
+					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
+					Cart</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
 					<a href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
@@ -40,62 +44,44 @@
 		</c:if>
 	</div>
 
-	<h2>Owner ${pageContext.request.userPrincipal.name}</h2>
+	<h2>
+		Account Details
+		<c:if test="${pageContext.request.isUserInRole('OWNER')}">
+			<a
+				href="${contextPath}/owner/edit_restaurant?name=${pageContext.request.userPrincipal.name}">
+				| Edit</a>
+		</c:if>
+	</h2>
+	<h3>Owner of the restaurant,
+		${pageContext.request.userPrincipal.name}</h3>
 	<table>
 		<tr>
 
-			<td>Name = ${restaurant.name}, ID = ${restaurant.id}, Address =
-				${restaurant.address}</td>
-
+			<td><h3>Name = ${restaurant.name}, ID = ${restaurant.id},
+					Address = ${restaurant.address}</h3></td>
 		</tr>
 	</table>
 	<table>
 		<tr>
-			<td><form action="/owner/edit_restaurant_name">
-					<table>
-						<tr>
-							<td><input type="hidden" name="name"
-								value="${restaurant.name}"></td>
-							<td><input type="text" name="newName" placeholder="new name"></td>
-							<td><input type="submit" value="set new name"></td>
-						</tr>
-					</table>
-				</form></td>
-		</tr>
-		<tr>
-			<td><form action="/owner/edit_restaurant_address">
-					<table>
-						<tr>
-							<td><input type="hidden" name="name"
-								value="${restaurant.name}"></td>
-							<td><input type="text" name="newName" placeholder="new name"></td>
-							<td><input type="submit" value="set new name"></td>
-						</tr>
-					</table>
-				</form></td>
+			<td>
+				<h2>Menu</h2>
+			</td>
 		</tr>
 		<tr>
 			<td><c:forEach var="item" items="${itemList}">
 					<table>
 						<tr>
-							<td><form action="/view_restaurant">
-									<table>
-										<tr>
-											<td><h4>${item.name} - ${item.description}</h4></td>
-										</tr>
-									</table>
-								</form></td>
+							<td>
+								<table>
+									<tr>
+										<td>
+											<h4>$${item.price} - ${item.name}, ${item.description}</h4>
+									</tr>
+								</table>
+							</td>
 						</tr>
 					</table>
-				</c:forEach>
-				<form action="/owner/edit_restaurant_add_item">
-					<input type="hidden" name="restaurantName"
-						value="${restaurant.name}"> <input type="text" name="name"
-						placeholder="Name"> <input type="text" name="description"
-						placeholder="Description"> <input type="number"
-						step="0.01" name="price" placeholder="Price"> <input
-						type="submit" value="Add Item">
-				</form></td>
+				</c:forEach></td>
 		</tr>
 	</table>
 

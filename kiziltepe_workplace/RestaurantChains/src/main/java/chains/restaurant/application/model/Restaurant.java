@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "restaurant")
 public class Restaurant {
@@ -16,8 +17,8 @@ public class Restaurant {
 	private String name;
 	private String address;
 
-	private HashSet<Long> menu;
-	private HashSet<Long> orders;
+    private HashSet<Long> menu;
+    private HashSet<Long> orders;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

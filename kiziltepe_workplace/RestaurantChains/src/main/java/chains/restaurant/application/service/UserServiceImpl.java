@@ -31,13 +31,13 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setRoles(new HashSet<>());
 		user.getRoles().add(roleRepository.findById(9));
-		user.setShoppingCart(new HashSet<Long>());
+		user.setShoppingCart(new HashSet<>());
 		if(user.getIsOwner()) {
 			user.getRoles().add(roleRepository.findById(1));
 			Restaurant restaurant = new Restaurant();
 			restaurantRepository.save(restaurant);
 			restaurant.setName(Long.toString(restaurant.getId()));
-			restaurant.setMenu(new HashSet<Long>());
+			restaurant.setMenu(new HashSet<>());
 			restaurantRepository.saveAndFlush(restaurant);
 			user.setMyRestaurant(restaurant);
 		}

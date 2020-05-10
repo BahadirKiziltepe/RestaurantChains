@@ -45,10 +45,20 @@ public class RestaurantController {
 		getItemList(mav, restaurant);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/owner/edit_restaurant", method = RequestMethod.GET)
+	public ModelAndView editRestaurant(@RequestParam String name) {
+		ModelAndView mav = new ModelAndView("editRestaurantForAdminAndOwner");
+        String restaurantName = userRepository.findByUsername(name).getMyRestaurant().getName();
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName);
+		mav.addObject("restaurant", restaurant);
+		getItemList(mav, restaurant);
+		return mav;
+	}
 
 	@RequestMapping(value = "/owner/edit_restaurant_name", method = RequestMethod.GET)
 	public ModelAndView editRestaurantName(@RequestParam String name, @RequestParam String newName) {
-		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
+		ModelAndView mav = new ModelAndView("editRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(name);
 		if (newName != null) {
 			restaurant.setName(newName);
@@ -61,7 +71,7 @@ public class RestaurantController {
 
 	@RequestMapping(value = "/owner/edit_restaurant_address", method = RequestMethod.GET)
 	public ModelAndView editRestaurantAddress(@RequestParam String name, @RequestParam String newName) {
-		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
+		ModelAndView mav = new ModelAndView("editRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(name);
 		if (newName != null) {
 			restaurant.setAddress(newName);
@@ -73,39 +83,37 @@ public class RestaurantController {
 	}
 
 	@RequestMapping(value = "/owner/edit_restaurant_edit_item_name", method = RequestMethod.GET)
-	public ModelAndView editItemName(@RequestParam String name, @RequestParam String oldName,
+	public ModelAndView editItemName(@RequestParam String name, @RequestParam Long id,
 			@RequestParam String newName) {
-		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
+		ModelAndView mav = new ModelAndView("editRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(name);
-		if (restaurant.getMenu().contains(oldName)) {
-
-		}
+		itemRepository.findById(id).get().setName(newName);
+		itemRepository.saveAndFlush(itemRepository.findById(id).get());
 		mav.addObject("restaurant", restaurant);
 		getItemList(mav, restaurant);
 		return mav;
 	}
 
 	@RequestMapping(value = "/owner/edit_restaurant_edit_item_description", method = RequestMethod.GET)
-	public ModelAndView editItemDescription(@RequestParam String name, @RequestParam String oldName,
+	public ModelAndView editItemDescription(@RequestParam String name, @RequestParam Long id,
 			@RequestParam String newName) {
-		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
+		ModelAndView mav = new ModelAndView("editRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(name);
-		if (restaurant.getMenu().contains(oldName)) {
-
-		}
+		itemRepository.findById(id).get().setDescription(newName);
+		itemRepository.saveAndFlush(itemRepository.findById(id).get());
 		mav.addObject("restaurant", restaurant);
 		getItemList(mav, restaurant);
 		return mav;
 	}
 
 	@RequestMapping(value = "/owner/edit_restaurant_edit_item_price", method = RequestMethod.GET)
-	public ModelAndView editItemPrice(@RequestParam String name, @RequestParam String oldName,
-			@RequestParam int newPrice) {
-		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
+	public ModelAndView editItemPrice(@RequestParam String name, @RequestParam Long id,
+			@RequestParam double newPrice) {
+		System.out.println(newPrice);
+		ModelAndView mav = new ModelAndView("editRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(name);
-		if (restaurant.getMenu().contains(oldName)) {
-
-		}
+		itemRepository.findById(id).get().setPrice(newPrice);;
+		itemRepository.saveAndFlush(itemRepository.findById(id).get());
 		mav.addObject("restaurant", restaurant);
 		getItemList(mav, restaurant);
 		return mav;
@@ -113,10 +121,22 @@ public class RestaurantController {
 
 	@RequestMapping(value = "/owner/edit_restaurant_add_item", method = RequestMethod.GET)
 	public ModelAndView addRestaurantItem(@RequestParam String restaurantName, Item item) {
-		ModelAndView mav = new ModelAndView("viewRestaurantForAdminAndOwner");
+		ModelAndView mav = new ModelAndView("editRestaurantForAdminAndOwner");
 		Restaurant restaurant = restaurantRepository.findByName(restaurantName);
 		itemRepository.saveAndFlush(item);
 		restaurant.getMenu().add(item.getId());
+		restaurantRepository.saveAndFlush(restaurant);
+		mav.addObject("restaurant", restaurant);
+		getItemList(mav, restaurant);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/owner/edit_restaurant_remove_item", method = RequestMethod.GET)
+	public ModelAndView removeRestaurantItem(@RequestParam String restaurantName, Long id) {
+		ModelAndView mav = new ModelAndView("editRestaurantForAdminAndOwner");
+		Restaurant restaurant = restaurantRepository.findByName(restaurantName);
+		itemRepository.deleteById(id);
+		restaurant.getMenu().remove(id);
 		restaurantRepository.saveAndFlush(restaurant);
 		mav.addObject("restaurant", restaurant);
 		getItemList(mav, restaurant);
@@ -127,8 +147,7 @@ public class RestaurantController {
         ArrayList<Item> items = new ArrayList<Item>();
         for(Long id : restaurant.getMenu()) {
         	if(itemRepository.existsById(id)) {
-        		Optional<Item> item = itemRepository.findById(id);
-        		items.add(item.get());
+        		items.add(itemRepository.findById(id).get());
         	} else {
         		restaurant.getMenu().remove(id);
         	}

@@ -106,12 +106,76 @@ public class UserController {
     	User user = userRepository.findByUsername(name);
     	mav.addObject("user", user);
     	getItemListForUser(mav, user);
-    	for(Long ids : userRepository.findByUsername(user.getUsername()).getShoppingCart()) {
-    		System.out.println(ids);
-    	}
         return mav;
     }
     
+    @RequestMapping(value = {"/edit_profile"}, method = RequestMethod.GET)
+    public ModelAndView editProfile(@RequestParam String name) {
+    	System.out.println(name);
+    	ModelAndView mav = new ModelAndView("editProfile");
+    	User user = userRepository.findByUsername(name);
+    	mav.addObject("user", user);
+    	getItemListForUser(mav, user);
+        return mav;
+    }
+    
+    @RequestMapping(value = {"/edit_profile_name"}, method = RequestMethod.GET)
+    public ModelAndView editProfileName(@RequestParam String name, @RequestParam String newName) {
+    	System.out.println(name);
+    	ModelAndView mav = new ModelAndView("editProfile");
+    	User user = userRepository.findByUsername(name);
+    	user.setName(newName);
+    	userRepository.saveAndFlush(user);
+    	mav.addObject("user", user);
+    	getItemListForUser(mav, user);
+        return mav;
+    }
+    
+    @RequestMapping(value = {"/edit_profile_address"}, method = RequestMethod.GET)
+    public ModelAndView editProfileAddress(@RequestParam String name, @RequestParam String newName) {
+    	System.out.println(name);
+    	ModelAndView mav = new ModelAndView("editProfile");
+    	User user = userRepository.findByUsername(name);
+    	user.setAddress(newName);
+    	userRepository.saveAndFlush(user);
+    	mav.addObject("user", user);
+    	getItemListForUser(mav, user);
+        return mav;
+    }
+    
+    @RequestMapping(value = {"/edit_profile_creditcard"}, method = RequestMethod.GET)
+    public ModelAndView editProfileCreditCart(@RequestParam String name, @RequestParam String newName) {
+    	System.out.println(name);
+    	ModelAndView mav = new ModelAndView("editProfile");
+    	User user = userRepository.findByUsername(name);
+    	user.setCreditCard(newName);
+    	userRepository.saveAndFlush(user);
+    	mav.addObject("user", user);
+    	getItemListForUser(mav, user);
+        return mav;
+    }
+    
+    @RequestMapping(value = {"/shoppingcart"}, method = RequestMethod.GET)
+    public ModelAndView shoppingCart(@RequestParam String name) {
+    	System.out.println(name);
+    	ModelAndView mav = new ModelAndView("shoppingcart");
+    	User user = userRepository.findByUsername(name);
+    	mav.addObject("user", user);
+    	getItemListForUser(mav, user);
+        return mav;
+    }
+    
+    @RequestMapping(value = {"/shoppingcart_checkout"}, method = RequestMethod.GET)
+    public ModelAndView shoppingCartCheckout(@RequestParam String name) {
+    	System.out.println(name);
+    	ModelAndView mav = new ModelAndView("shoppingcart");
+    	User user = userRepository.findByUsername(name);
+    	user.getShoppingCart().clear();
+    	userRepository.saveAndFlush(user);
+    	mav.addObject("user", user);
+    	getItemListForUser(mav, user);
+        return mav;
+    }    
     @RequestMapping(value = {"/view_restaurant"}, method = RequestMethod.GET)
     public ModelAndView viewRestaurant(@RequestParam String name) {
     	ModelAndView mav = new ModelAndView("viewRestaurantForUser");
@@ -122,26 +186,29 @@ public class UserController {
     }
     
     @RequestMapping(value = {"/view_restaurant/add_item"}, method = RequestMethod.GET)
-    public ModelAn								dView additem(@RequestParam String name, @RequestParam String user, @RequestParam Long id) {
+    public ModelAndView additem(@RequestParam String name, @RequestParam String user, @RequestParam Long id) {
     	ModelAndView mav = new ModelAndView("viewRestaurantForUser");
     	Restaurant restaurant = restaurantRepository.findByName(name);
     	mav.addObject("restaurant", restaurant);
-    	getItemListForRestaurant(mav, restaurant);
     	userRepository.findByUsername(user).getShoppingCart().add(id);
+    	userRepository.saveAndFlush(userRepository.findByUsername(user));
+    	getItemListForRestaurant(mav, restaurant);
         return mav;
     }
     
 	public void getItemListForUser(ModelAndView mav, User user) {
+		double total = 0;
         ArrayList<Item> items = new ArrayList<Item>();
         for(Long id : user.getShoppingCart()) {
         	if(itemRepository.existsById(id)) {
-        		Optional<Item> item = itemRepository.findById(id);
-        		items.add(item.get());
+        		items.add(itemRepository.findById(id).get());
+        		total+=itemRepository.findById(id).get().getPrice();
         	} else {
         		user.getShoppingCart().remove(id);
         	}
         }
         Iterable<Item> itemListUser = items;
+        mav.addObject("total", total);
 		mav.addObject("itemListUser", itemListUser);
 	}
 	
@@ -149,8 +216,7 @@ public class UserController {
         ArrayList<Item> items = new ArrayList<Item>();
         for(Long id : restaurant.getMenu()) {
         	if(itemRepository.existsById(id)) {
-        		Optional<Item> item = itemRepository.findById(id);
-        		items.add(item.get());
+        		items.add(itemRepository.findById(id).get());
         	} else {
         		restaurant.getMenu().remove(id);
         	}

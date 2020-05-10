@@ -1,8 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="chains.restaurant.application.model.Restaurant"%>
-<%@ page import="chains.restaurant.application.model.Item"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -31,11 +29,7 @@
 					value="${_csrf.token}" />
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/welcome">Home</a> | <a
-					href="/profile?name=${pageContext.request.userPrincipal.name}">My
-					Account</a> | <a
-					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
-					Cart</a> |
+				| <a href="/welcome">Home</a> | <a href="/profile?name=${pageContext.request.userPrincipal.name}">My Account</a> | 
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
 					<a href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
@@ -43,38 +37,23 @@
 			</h3>
 		</c:if>
 	</div>
-	<div>
-		<table>
-			<tr>
 
-				<td><h4>Name = ${restaurant.name}, Address =
-						${restaurant.address}</h4></td>
-			</tr>
-		</table>
-		<table>
-			<tr>
-				<td><c:forEach var="item" items="${itemListRestaurant}">
+	<div>
+	<h3>Shopping Cart</h3>
+		<c:forEach var="item" items="${itemListUser}">
+			<table>
+				<tr>
+					<td>
 						<table>
 							<tr>
-								<td><form action="/view_restaurant/add_item">
-										<table>
-											<tr>
-												<td><input type="hidden" name="name"
-													value="${restaurant.name}"></td>
-												<td><input type="hidden" name="user"
-													value="${pageContext.request.userPrincipal.name}"></td>
-												<td><input type="hidden" name="id" value="${item.id}"></td>
-												<td><h4>$${item.price} - ${item.name},
-														${item.description}</h4></td>
-												<td><input type="submit" value="Add Item"></td>
-											</tr>
-										</table>
-									</form></td>
+								<td><h4>$${item.price} - ${item.name}, ${item.description}</h4></td>
 							</tr>
 						</table>
-					</c:forEach></td>
-			</tr>
-		</table>
+					</td>
+				</tr>
+			</table>
+		</c:forEach>
+		<h4>total = $${total}</h4>
 	</div>
 	<!-- /container -->
 	<script

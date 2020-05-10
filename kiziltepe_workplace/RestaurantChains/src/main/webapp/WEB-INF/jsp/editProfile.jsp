@@ -1,8 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="chains.restaurant.application.model.Restaurant"%>
-<%@ page import="chains.restaurant.application.model.Item"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -32,8 +30,6 @@
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
 				| <a href="/welcome">Home</a> | <a
-					href="/profile?name=${pageContext.request.userPrincipal.name}">My
-					Account</a> | <a
 					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
 					Cart</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
@@ -43,39 +39,38 @@
 			</h3>
 		</c:if>
 	</div>
-	<div>
-		<table>
-			<tr>
 
-				<td><h4>Name = ${restaurant.name}, Address =
-						${restaurant.address}</h4></td>
-			</tr>
-		</table>
-		<table>
-			<tr>
-				<td><c:forEach var="item" items="${itemListRestaurant}">
-						<table>
-							<tr>
-								<td><form action="/view_restaurant/add_item">
-										<table>
-											<tr>
-												<td><input type="hidden" name="name"
-													value="${restaurant.name}"></td>
-												<td><input type="hidden" name="user"
-													value="${pageContext.request.userPrincipal.name}"></td>
-												<td><input type="hidden" name="id" value="${item.id}"></td>
-												<td><h4>$${item.price} - ${item.name},
-														${item.description}</h4></td>
-												<td><input type="submit" value="Add Item"></td>
-											</tr>
-										</table>
-									</form></td>
-							</tr>
-						</table>
-					</c:forEach></td>
-			</tr>
-		</table>
+	<div>
+		<h2>
+			Account Details | <a
+				href="/profile?name=${pageContext.request.userPrincipal.name}">Profile</a>
+		</h2>
 	</div>
+
+	<div>
+		<h4>Name: ${user.name}</h4>
+		<form action="/edit_profile_name">
+			<input type="hidden" name="name"
+				value="${pageContext.request.userPrincipal.name}"> <input
+				type="text" name="newName" placeholder="New Name"> <input
+				type="submit" value="Save Name">
+		</form>
+		<h4>Address: ${user.address}</h4>
+		<form action="/edit_profile_address">
+			<input type="hidden" name="name"
+				value="${pageContext.request.userPrincipal.name}"> <input
+				type="text" name="newName" placeholder="New Address"> <input
+				type="submit" value="Save Address">
+		</form>
+		<h4>Credit Card: ${user.creditCard}</h4>
+		<form action="/edit_profile_creditcard">
+			<input type="hidden" name="name"
+				value="${pageContext.request.userPrincipal.name}"> <input
+				type="text" name="newName" placeholder="0000 0000 0000 0000"> <input
+				type="submit" value="Save Card">
+		</form>
+	</div>
+
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
