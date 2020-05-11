@@ -30,10 +30,12 @@
 					value="${_csrf.token}" />
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/profile?name=${pageContext.request.userPrincipal.name}">My Account</a> | <a
+				| <a href="/profile?name=${pageContext.request.userPrincipal.name}">My
+					Account</a> | <a
 					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
-					Cart</a> | <c:if test="${pageContext.request.isUserInRole('ADMIN')}">
-					<a  href="${contextPath}/h2-console">CONSOLE</a> |
+					Cart</a> |
+				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
+					<a href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
 				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
 			</h3>
@@ -69,26 +71,50 @@
 	<c:if test="${pageContext.request.isUserInRole('OWNER')}">
 
 		<div>
-			<table>
-				<tr>
-					<td>
-						<h2>My Restaurant</h2>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table>
-							<tr>
-								<td>
-									<form action="/owner/view_restaurant">
-										<input type="hidden" name="name"
-											value="${pageContext.request.userPrincipal.name}"> <input
-											type="submit" value="My Restaurant">
-									</form>
-								</td>
-							</tr>
-						</table>
-			</table>
+			<c:choose>
+				<c:when test="${pageContext.request.isUserInRole('ADMIN')}">
+					<table>
+						<tr>
+							<td>
+								<h2>All Restaurants</h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table>
+									<tr>
+										<td>
+											<form action="/admin/view_restaurants">
+												<input type="submit" value="View Restaurants">
+											</form>
+										</td>
+									</tr>
+								</table>
+					</table>
+				</c:when>
+				<c:otherwise>
+					<table>
+						<tr>
+							<td>
+								<h2>My Restaurant</h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table>
+									<tr>
+										<td>
+											<form action="/owner/view_restaurant">
+												<input type="hidden" name="name"
+													value="${pageContext.request.userPrincipal.name}">
+												<input type="submit" value="My Restaurant">
+											</form>
+										</td>
+									</tr>
+								</table>
+					</table>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</c:if>
 	<!-- /container -->

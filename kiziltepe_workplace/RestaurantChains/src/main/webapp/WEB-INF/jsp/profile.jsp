@@ -54,6 +54,10 @@
 		<h4>Address: ${user.address}</h4>
 		<h4>Credit Card: ${user.creditCard}</h4>
 	</div>
+	
+	<div>
+	<h2><a href="/orders?name=${pageContext.request.userPrincipal.name}">Order History</a></h2>
+	</div>
 
 	<!-- /container -->
 	<script

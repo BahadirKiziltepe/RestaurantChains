@@ -55,7 +55,7 @@
 	<table>
 		<tr>
 			<td><h3>Name = ${restaurant.name}, ID = ${restaurant.id},
-					Address = ${restaurant.address} |</h3></td>
+					Address = ${restaurant.address}</h3></td>
 		</tr>
 	</table>
 	<table>
@@ -80,7 +80,7 @@
 								value="${restaurant.name}"></td>
 							<td><input type="text" name="newName"
 								placeholder="New Restaurant Adress"></td>
-							<td><input type="submit" value="set new name"></td>
+							<td><input type="submit" value="set new Address"></td>
 						</tr>
 					</table>
 				</form></td>
@@ -98,7 +98,7 @@
 								<table>
 									<tr>
 										<td>
-											<h4>$${item.price} - ${item.name}, ${item.description}</h4>
+											<h4>$${item.price} - ${item.name}, ${item.description} | </h4>
 										<td>
 											<form action="/owner/edit_restaurant_edit_item_name">
 												<input type="hidden" name="name" value="${restaurant.name}">
@@ -113,7 +113,7 @@
 												<input type="hidden" name="id" value="${item.id}"> <input
 													type="text" name="newName"
 													placeholder="New Item Description"> <input
-													type="submit" value="Change Name">
+													type="submit" value="Change Description">
 											</form>
 										</td>
 										<td>
@@ -122,11 +122,11 @@
 												<input type="hidden" name="id" value="${item.id}"> <input
 													type="number" step="0.01" name="newPrice"
 													placeholder="New Item Price"> <input type="submit"
-													value="Change Name">
+													value="Change Price">
 											</form>
 										</td>
 										<td>
-											<form action="/owner/edit_restaurant_remove_item">
+											<form action="/owner/edit_restaurant_remove_item"> | 
 												<input type="hidden" name="restaurantName"
 													value="${restaurant.name}"> <input type="hidden"
 													name="id" value="${item.id}"> <input type="submit"

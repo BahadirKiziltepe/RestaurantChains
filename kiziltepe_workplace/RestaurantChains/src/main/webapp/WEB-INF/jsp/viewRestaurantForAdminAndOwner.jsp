@@ -45,10 +45,10 @@
 	</div>
 
 	<h2>
-		Account Details
+		Restaurant Details
 		<c:if test="${pageContext.request.isUserInRole('OWNER')}">
 			<a
-				href="${contextPath}/owner/edit_restaurant?name=${pageContext.request.userPrincipal.name}">
+				href="${contextPath}/owner/edit_restaurant?name=${restaurant.name}">
 				| Edit</a>
 		</c:if>
 	</h2>
@@ -64,7 +64,7 @@
 	<table>
 		<tr>
 			<td>
-				<h2>Menu</h2>
+				<h2>Menu | <a href="/owner/orders?name=${restaurant.name}">Order History</a></h2>
 			</td>
 		</tr>
 		<tr>

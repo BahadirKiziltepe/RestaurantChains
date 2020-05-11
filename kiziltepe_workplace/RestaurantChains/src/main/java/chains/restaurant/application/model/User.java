@@ -2,6 +2,7 @@ package chains.restaurant.application.model;
 
 import javax.persistence.*;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +21,9 @@ public class User {
 	@ManyToMany
 	@JoinTable(name = "user_role")
 	private Set<Role> roles;
+	
 	private HashSet<Long> shoppingCart;
+	private HashSet<Long> orders;
 	
 	private Restaurant myRestaurant;
 
@@ -58,7 +61,8 @@ public class User {
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}
-
+	
+	@Column(length = Integer.MAX_VALUE)
 	public HashSet<Long> getShoppingCart() {
 		return shoppingCart;
 	}
@@ -66,6 +70,15 @@ public class User {
 	public void setShoppingCart(HashSet<Long> shoppingCart) {
 		this.shoppingCart = shoppingCart;
 	}	
+	
+	@Column(length = Integer.MAX_VALUE)
+	public HashSet<Long> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(HashSet<Long> orders) {
+		this.orders = orders;
+	}
 
 	@ManyToOne(targetEntity = Restaurant.class)
 	public Restaurant getMyRestaurant() {

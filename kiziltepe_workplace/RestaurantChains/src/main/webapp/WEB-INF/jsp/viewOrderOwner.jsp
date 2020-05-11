@@ -29,7 +29,11 @@
 					value="${_csrf.token}" />
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/welcome">Home</a> | <a href="/profile?name=${pageContext.request.userPrincipal.name}">My Account</a> | 
+				| <a href="/welcome">Home</a> | <a
+					href="/profile?name=${pageContext.request.userPrincipal.name}">My
+					Account</a> | <a
+					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
+					Cart</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
 					<a href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
@@ -39,14 +43,15 @@
 	</div>
 
 	<div>
-	<h3>Shopping Cart</h3>
-		<c:forEach var="item" items="${itemListUser}">
+		<h3>Order ID = ${id}</h3>
+		<c:forEach var="item" items="${orderRestaurant}">
 			<table>
 				<tr>
 					<td>
 						<table>
 							<tr>
-								<td><h4>$${item.price} - ${item.name}, ${item.description}</h4></td>
+								<td><h4>$${item.price} - ${item.name},
+										${item.description}</h4></td>
 							</tr>
 						</table>
 					</td>
@@ -54,10 +59,6 @@
 			</table>
 		</c:forEach>
 		<h4>total = $${total}</h4>
-		<form action="/checkout">
-		<input type="hidden" name="name" value="${pageContext.request.userPrincipal.name}">
-		<input type="submit" value="Checkout">
-		</form>
 	</div>
 	<!-- /container -->
 	<script
