@@ -196,7 +196,7 @@ public class UserController {
 		user.getOrders().add(userOrder.getId());
 		userRepository.saveAndFlush(user);
 		mav.addObject("user", user);
-		mav.addObject("id", userOrder.getId())
+		mav.addObject("id", userOrder.getId());
 		return mav;
 	}
 	
