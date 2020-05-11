@@ -42,16 +42,26 @@
 
 	<div class="tableDiv">
 		<h2>
-			Account Details | <a
-				href="/admin/view_user?id=${user.id}">Profile</a>
+			Account Details | <a href="/admin/view_user?id=${user.id}">Profile</a>
 		</h2>
 	</div>
 
 	<div class="tableDiv">
+		<h3>Username: ${user.username}</h3>
+		<form action="/admin/edit_profile_username">
+			<input type="hidden" name="id" value="${user.id}"> <input
+				type="text" name="newName" placeholder="New Username"> <input
+				type="submit" value="Save Username">
+		</form>
+		<h3>Password: ***</h3>
+		<form action="/admin/edit_profile_password">
+			<input type="hidden" name="id" value="${user.id}"> <input
+				type="password" name="newName" placeholder="New Password"> <input
+				type="submit" value="Save Password">
+		</form>
 		<h3>Name: ${user.name}</h3>
 		<form action="/admin/edit_profile_name">
-			<input type="hidden" name="id"
-				value="${user.id}"> <input
+			<input type="hidden" name="id" value="${user.id}"> <input
 				type="text" name="newName" placeholder="New Name"> <input
 				type="submit" value="Save Name">
 		</form>
@@ -66,8 +76,8 @@
 		<form action="/admin/edit_profile_creditcard">
 			<input type="hidden" name="name"
 				value="${pageContext.request.userPrincipal.name}"> <input
-				type="text" name="newName" placeholder="0000 0000 0000 0000"> <input
-				type="submit" value="Save Card">
+				type="text" name="newName" placeholder="0000 0000 0000 0000">
+			<input type="submit" value="Save Card">
 		</form>
 	</div>
 

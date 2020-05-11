@@ -3,6 +3,7 @@ package chains.restaurant.application.web;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,6 +32,9 @@ public class AdminController {
 
 	@Autowired
 	private ItemRepository itemRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping(value = "/admin/view_users", method = RequestMethod.GET)
 	public ModelAndView viewUsers() {
@@ -51,6 +55,26 @@ public class AdminController {
 	public ModelAndView editUser(@RequestParam Long id) {
 		ModelAndView mav = new ModelAndView("editProfileAdmin");
 		mav.addObject("user", userRepository.findById(id).get());
+		return mav;
+	}
+
+	@RequestMapping(value = { "/admin/edit_profile_username" }, method = RequestMethod.GET)
+	public ModelAndView editProfileUsername(@RequestParam Long id, @RequestParam String newName) {
+		ModelAndView mav = new ModelAndView("editProfileAdmin");
+		userRepository.findById(id).get().setUsername(newName);
+		userRepository.saveAndFlush(userRepository.findById(id).get());
+		mav.addObject("user", userRepository.findById(id).get());
+		getItemListForUser(mav, userRepository.findById(id).get());
+		return mav;
+	}
+
+	@RequestMapping(value = { "/admin/edit_profile_password" }, method = RequestMethod.GET)
+	public ModelAndView editProfilePassword(@RequestParam Long id, @RequestParam String newName) {
+		ModelAndView mav = new ModelAndView("editProfileAdmin");
+		userRepository.findById(id).get().setPassword(bCryptPasswordEncoder.encode(newName));
+		userRepository.saveAndFlush(userRepository.findById(id).get());
+		mav.addObject("user", userRepository.findById(id).get());
+		getItemListForUser(mav, userRepository.findById(id).get());
 		return mav;
 	}
 

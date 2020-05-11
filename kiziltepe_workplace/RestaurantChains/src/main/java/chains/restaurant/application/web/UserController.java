@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -119,6 +120,17 @@ public class UserController {
 	public ModelAndView editProfile(@RequestParam String name) {
 		ModelAndView mav = new ModelAndView("editProfile");
 		User user = userRepository.findByUsername(name);
+		mav.addObject("user", user);
+		getItemListForUser(mav, user);
+		return mav;
+	}
+	
+	@RequestMapping(value = { "/edit_profile_username" }, method = RequestMethod.GET)
+	public ModelAndView editProfileUsername(@RequestParam String name, @RequestParam String newName) {
+		ModelAndView mav = new ModelAndView("editProfile");
+		User user = userRepository.findByUsername(name);
+		user.setUsername(newName);
+		userRepository.saveAndFlush(user);
 		mav.addObject("user", user);
 		getItemListForUser(mav, user);
 		return mav;

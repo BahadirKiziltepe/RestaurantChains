@@ -48,11 +48,11 @@
 	</div>
 
 	<div class="tableDiv">
-		<h4>User ID: ${user.id}</h4>
-		<h4>Username: ${user.username}</h4>
-		<h4>Name: ${user.name}</h4>
-		<h4>Address: ${user.address}</h4>
-		<h4>Credit Card: ${user.creditCard}</h4>
+		<h3>User ID: ${user.id}</h3>
+		<h3>Username: ${user.username}</h3>
+		<h3>Name: ${user.name}</h3>
+		<h3>Address: ${user.address}</h3>
+		<h3>Credit Card: ${user.creditCard}</h3>
 	</div>
 
 	<div class="myRestaurant">

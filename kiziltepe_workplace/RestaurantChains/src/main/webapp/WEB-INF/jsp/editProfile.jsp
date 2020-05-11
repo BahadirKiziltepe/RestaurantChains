@@ -48,6 +48,13 @@
 	</div>
 
 	<div class="tableDiv">
+		<h3>Username: ${user.username}</h3>
+		<form action="/edit_profile_username">
+			<input type="hidden" name="name"
+				value="${pageContext.request.userPrincipal.name}"> <input
+				type="text" name="newName" placeholder="New Username"> <input
+				type="submit" value="Save Username">
+		</form>
 		<h3>Name: ${user.name}</h3>
 		<form action="/edit_profile_name">
 			<input type="hidden" name="name"
@@ -66,8 +73,8 @@
 		<form action="/edit_profile_creditcard">
 			<input type="hidden" name="name"
 				value="${pageContext.request.userPrincipal.name}"> <input
-				type="text" name="newName" placeholder="0000 0000 0000 0000"> <input
-				type="submit" value="Save Card">
+				type="text" name="newName" placeholder="0000 0000 0000 0000">
+			<input type="submit" value="Save Card">
 		</form>
 	</div>
 
