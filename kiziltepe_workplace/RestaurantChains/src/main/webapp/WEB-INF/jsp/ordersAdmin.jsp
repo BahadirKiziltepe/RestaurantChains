@@ -48,11 +48,9 @@
 			<table>
 				<tr>
 					<td>
-						<form action="/owner/view_order">
+						<form action="/admin/view_user_order">
 							<table>
 								<tr>
-									<td><input type="hidden" name="name"
-										value="${restaurant.name}"></td>
 									<td><input type="hidden" name="id" value="${order.id}"></td>
 									<td><h4>${order.id}</h4></td>
 									<td><input type="submit" value="View Order"></td>

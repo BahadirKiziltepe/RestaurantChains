@@ -40,29 +40,29 @@
 		</c:if>
 	</div>
 
-	<div>
+	<div class="tableDiv">
 		<h2>
 			Account Details | <a
 				href="/profile?name=${pageContext.request.userPrincipal.name}">Profile</a>
 		</h2>
 	</div>
 
-	<div>
-		<h4>Name: ${user.name}</h4>
+	<div class="tableDiv">
+		<h3>Name: ${user.name}</h3>
 		<form action="/edit_profile_name">
 			<input type="hidden" name="name"
 				value="${pageContext.request.userPrincipal.name}"> <input
 				type="text" name="newName" placeholder="New Name"> <input
 				type="submit" value="Save Name">
 		</form>
-		<h4>Address: ${user.address}</h4>
+		<h3>Address: ${user.address}</h3>
 		<form action="/edit_profile_address">
 			<input type="hidden" name="name"
 				value="${pageContext.request.userPrincipal.name}"> <input
 				type="text" name="newName" placeholder="New Address"> <input
 				type="submit" value="Save Address">
 		</form>
-		<h4>Credit Card: ${user.creditCard}</h4>
+		<h3>Credit Card: ${user.creditCard}</h3>
 		<form action="/edit_profile_creditcard">
 			<input type="hidden" name="name"
 				value="${pageContext.request.userPrincipal.name}"> <input

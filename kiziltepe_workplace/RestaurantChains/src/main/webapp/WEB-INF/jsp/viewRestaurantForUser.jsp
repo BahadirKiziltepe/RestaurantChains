@@ -43,14 +43,12 @@
 			</h3>
 		</c:if>
 	</div>
-	<div>
-		<table>
-			<tr>
-
-				<td><h4>Name = ${restaurant.name}, Address =
-						${restaurant.address}</h4></td>
-			</tr>
-		</table>
+	<div class="myRestaurant">
+		<h3>Restaurant Details</h3>
+		<h3>Name = ${restaurant.name}, Address = ${restaurant.address}</h3>
+	</div>
+	<div class="tableDiv">
+		<h2>Menu</h2>
 		<table>
 			<tr>
 				<td><c:forEach var="item" items="${itemListRestaurant}">
@@ -64,9 +62,9 @@
 												<td><input type="hidden" name="user"
 													value="${pageContext.request.userPrincipal.name}"></td>
 												<td><input type="hidden" name="id" value="${item.id}"></td>
-												<td><h4>$${item.price} - ${item.name},
-														${item.description}</h4></td>
-												<td><input type="submit" value="Add Item"></td>
+												<td><h3>$${item.price} - ${item.name},
+														${item.description}</h3></td>
+												<td><h4><input type="submit" value="Add Item"></h4></td>
 											</tr>
 										</table>
 									</form></td>

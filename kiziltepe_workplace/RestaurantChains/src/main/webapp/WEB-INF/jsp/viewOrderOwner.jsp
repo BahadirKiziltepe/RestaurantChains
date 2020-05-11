@@ -42,23 +42,29 @@
 		</c:if>
 	</div>
 
-	<div>
-		<h3>Order ID = ${id}</h3>
+	<div class="tableDiv">
+		<h2>Order ID = ${id}</h2>
 		<c:forEach var="item" items="${orderRestaurant}">
 			<table>
 				<tr>
 					<td>
 						<table>
 							<tr>
-								<td><h4>$${item.price} - ${item.name},
-										${item.description}</h4></td>
+								<td><h3>$${item.price} - ${item.name},
+										${item.description}</h3></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 			</table>
 		</c:forEach>
-		<h4>total = $${total}</h4>
+		<table class="myRestaurant">
+			<tr>
+				<td>
+					<h2>total = $${total}</h2>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<!-- /container -->
 	<script

@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SHOPPING CART</title>
+<title>EDIT PROFILE</title>
 
 <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -30,8 +30,6 @@
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
 				| <a href="/welcome">Home</a> | <a
-					href="/profile?name=${pageContext.request.userPrincipal.name}">My
-					Account</a> | <a
 					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
 					Cart</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
@@ -43,27 +41,36 @@
 	</div>
 
 	<div class="tableDiv">
-		<h3>Order History</h3>
-		<c:forEach var="order" items="${orderList}">
-			<table>
-				<tr>
-					<td>
-						<form action="/owner/view_order">
-							<table>
-								<tr>
-									<td><input type="hidden" name="name"
-										value="${restaurant.name}"></td>
-									<td><input type="hidden" name="id" value="${order.id}"></td>
-									<td><h4>${order.id}</h4></td>
-									<td><input type="submit" value="View Order"></td>
-								</tr>
-							</table>
-						</form>
-					</td>
-				</tr>
-			</table>
-		</c:forEach>
+		<h2>
+			Account Details | <a
+				href="/admin/view_user?id=${user.id}">Profile</a>
+		</h2>
 	</div>
+
+	<div class="tableDiv">
+		<h3>Name: ${user.name}</h3>
+		<form action="/admin/edit_profile_name">
+			<input type="hidden" name="id"
+				value="${user.id}"> <input
+				type="text" name="newName" placeholder="New Name"> <input
+				type="submit" value="Save Name">
+		</form>
+		<h3>Address: ${user.address}</h3>
+		<form action="/admin/edit_profile_address">
+			<input type="hidden" name="name"
+				value="${pageContext.request.userPrincipal.name}"> <input
+				type="text" name="newName" placeholder="New Address"> <input
+				type="submit" value="Save Address">
+		</form>
+		<h3>Credit Card: ${user.creditCard}</h3>
+		<form action="/admin/edit_profile_creditcard">
+			<input type="hidden" name="name"
+				value="${pageContext.request.userPrincipal.name}"> <input
+				type="text" name="newName" placeholder="0000 0000 0000 0000"> <input
+				type="submit" value="Save Card">
+		</form>
+	</div>
+
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

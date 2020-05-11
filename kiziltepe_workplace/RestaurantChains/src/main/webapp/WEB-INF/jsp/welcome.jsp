@@ -42,11 +42,11 @@
 		</c:if>
 	</div>
 
-	<div>
+	<div class="tableDiv">
 		<table>
 			<tr>
 				<td>
-					<h2>Restaurants</h2>
+					<h1>Restaurants</h1>
 				</td>
 			</tr>
 			<tr>
@@ -58,7 +58,9 @@
 											<tr>
 												<td><input type="hidden" name="name"
 													value="${restaurant.name}"></td>
-												<td><input type="submit" value="${restaurant.name}"></td>
+												<td><h3>
+														<input type="submit" value="${restaurant.name}">
+													</h3></td>
 											</tr>
 										</table>
 									</form></td>
@@ -70,13 +72,13 @@
 	</div>
 	<c:if test="${pageContext.request.isUserInRole('OWNER')}">
 
-		<div>
+		<div class="myRestaurant">
 			<c:choose>
 				<c:when test="${pageContext.request.isUserInRole('ADMIN')}">
 					<table>
 						<tr>
 							<td>
-								<h2>All Restaurants</h2>
+								<h2>All Restaurants | All Users</h2>
 							</td>
 						</tr>
 						<tr>
@@ -86,6 +88,9 @@
 										<td>
 											<form action="/admin/view_restaurants">
 												<input type="submit" value="View Restaurants">
+											</form>
+											<form action="/admin/view_users">
+												<input type="submit" value="View Users">
 											</form>
 										</td>
 									</tr>

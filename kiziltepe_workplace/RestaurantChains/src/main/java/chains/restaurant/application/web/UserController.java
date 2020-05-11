@@ -165,6 +165,17 @@ public class UserController {
 		getItemListForUser(mav, user);
 		return mav;
 	}
+	
+	@RequestMapping(value = { "/shoppingcart/remove_item" }, method = RequestMethod.GET)
+	public ModelAndView shoppingCartRemoveItem(@RequestParam String name, @RequestParam Long id) {
+		ModelAndView mav = new ModelAndView("shoppingcart");
+		User user = userRepository.findByUsername(name);
+		user.getShoppingCart().remove(id);
+		userRepository.saveAndFlush(user);
+		mav.addObject("user", user);
+		getItemListForUser(mav, user);
+		return mav;
+	}
 
 	@RequestMapping(value = { "/checkout" }, method = RequestMethod.GET)
 	public ModelAndView shoppingCartCheckout(@RequestParam String name) {

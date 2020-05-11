@@ -29,10 +29,34 @@ audio
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
@@ -41,7 +65,19 @@ controls
 ]
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -51,13 +87,49 @@ display
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
  
 
 
+
+
+
+
+
+
 none
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -68,10 +140,34 @@ height
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0
@@ -138,17 +234,53 @@ svg
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :root
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -158,13 +290,49 @@ overflow
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
  
 
 
+
+
+
+
+
+
 hidden
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1926,6 +2094,27 @@ pre code {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+}
+
+.tableDiv {
+	padding-right: 350px;
+	padding-left: 350px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.editAcc {
+	padding-right: 50px;
+	padding-left: 50px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.myRestaurant {
+	position: absolute;
+	bottom: 8px;
+	left: 16px;
+	font-size: 18px;
 }
 
 @media ( min-width : 768px) {
@@ -4098,38 +4287,110 @@ tbody.collapse.in {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
@@ -4137,7 +4398,19 @@ tbody.collapse.in {
 
 
 
+
+
+
+
+
+
 	
+
+
+
+
+
+
 
 
 )
@@ -4147,10 +4420,34 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0
@@ -4166,7 +4463,31 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :first-child
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4174,28 +4495,76 @@ border-radius
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 .dropdown-toggle
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -4205,10 +4574,34 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0;
@@ -4217,10 +4610,34 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0
@@ -4232,7 +4649,31 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :last-child
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4240,14 +4681,38 @@ border-bottom-right-radius
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 ),
@@ -4258,18 +4723,54 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
 	
 
 
+
+
+
+
+
+
 (
 :first-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -4279,10 +4780,34 @@ border-top-left-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0;
@@ -4291,10 +4816,34 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0
@@ -4382,31 +4931,91 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -4416,10 +5025,34 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0
@@ -4431,7 +5064,31 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :first-child
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4439,14 +5096,38 @@ border-radius
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -4456,14 +5137,50 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
  
 
 
+
+
+
+
+
+
 4
 px
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4474,10 +5191,34 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0;
@@ -4486,10 +5227,34 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0
@@ -4501,7 +5266,31 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :last-child
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4509,14 +5298,38 @@ border-bottom-left-radius
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -4526,10 +5339,34 @@ border-top-left-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0;
@@ -4538,10 +5375,34 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0;
@@ -4550,14 +5411,50 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
  
 
 
+
+
+
+
+
+
 4
 px
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4683,7 +5580,19 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 .input-group
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 .form-control
@@ -4691,31 +5600,91 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 ),
@@ -4724,31 +5693,91 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 ),
@@ -4757,31 +5786,91 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :first-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 :last-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -4791,10 +5880,34 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0
@@ -4837,10 +5950,34 @@ border-radius
 .input-group
 
 
+
+
+
+
+
+
  
 
 
+
+
+
+
+
+
 .form-control
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4852,9 +5989,33 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :first-child
 ,
 .input-group-btn
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4864,6 +6025,18 @@ border-radius
 .btn
 ,
 .input-group-btn
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4879,11 +6052,35 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :first-child
 >
 .dropdown-toggle
 ,
 .input-group-btn
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4895,18 +6092,54 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
 	
 
 
+
+
+
+
+
+
 (
 :last-child
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -4918,6 +6151,18 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :last-child
 >
 .btn
@@ -4925,10 +6170,34 @@ border-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
@@ -4936,21 +6205,57 @@ border-radius
 
 
 
+
+
+
+
+
+
 	
+
+
+
+
+
+
 
 
 )
 :not
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 (
 .dropdown-toggle
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 )
@@ -4960,10 +6265,34 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0;
@@ -4972,10 +6301,34 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
+
  
+
+
+
+
+
+
 
 
 0

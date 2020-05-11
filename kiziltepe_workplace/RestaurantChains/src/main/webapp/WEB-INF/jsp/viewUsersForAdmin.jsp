@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="chains.restaurant.application.model.Restaurant"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -14,7 +15,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SHOPPING CART</title>
+<title>ALL RESTAURANTS</title>
 
 <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -22,6 +23,7 @@
 
 </head>
 <body class="homebg">
+
 	<div class="container">
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
 			<form id="logoutForm" method="POST" action="${contextPath}/logout">
@@ -29,8 +31,7 @@
 					value="${_csrf.token}" />
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/welcome">Home</a> | <a
-					href="/profile?name=${pageContext.request.userPrincipal.name}">My
+				| <a href="/welcome">Home</a> | <a href="/profile?name=${pageContext.request.userPrincipal.name}">My
 					Account</a> | <a
 					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
 					Cart</a> |
@@ -42,28 +43,26 @@
 		</c:if>
 	</div>
 
-	<div class="tableDiv">
-		<h3>Order History</h3>
-		<c:forEach var="order" items="${orderList}">
-			<table>
-				<tr>
-					<td>
-						<form action="/owner/view_order">
-							<table>
-								<tr>
-									<td><input type="hidden" name="name"
-										value="${restaurant.name}"></td>
-									<td><input type="hidden" name="id" value="${order.id}"></td>
-									<td><h4>${order.id}</h4></td>
-									<td><input type="submit" value="View Order"></td>
-								</tr>
-							</table>
-						</form>
-					</td>
-				</tr>
-			</table>
-		</c:forEach>
-	</div>
+	<table class="tableDiv">
+		<tr>
+			<td><h2>Users</h2><c:forEach var="user" items="${userList}">
+					<table>
+						<tr>
+							<td><form action="/admin/view_user">
+									<table>
+										<tr>
+											<td><input type="hidden" name="id"
+												value="${user.id}"></td>
+											<td><input type="submit" value="${user.username}"></td>
+										</tr>
+									</table>
+								</form></td>
+						</tr>
+					</table>
+				</c:forEach></td>
+		</tr>
+	</table>
+
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

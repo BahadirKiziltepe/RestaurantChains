@@ -42,25 +42,32 @@
 		</c:if>
 	</div>
 
-	<div>
-		<h3>
-			Thank You for Shopping! Order ID = ${id} | <a href="/welcome">Continue Shopping...</a>
-		</h3>
+	<div class="tableDiv">
+		<h2>
+			Thank You for Shopping! Order ID = ${id} | <a href="/welcome">Continue
+				Shopping...</a>
+		</h2>
 		<c:forEach var="item" items="${itemListUser}">
 			<table>
 				<tr>
 					<td>
 						<table>
 							<tr>
-								<td><h4>$${item.price} - ${item.name},
-										${item.description}</h4></td>
+								<td><h3>$${item.price} - ${item.name},
+										${item.description}</h3></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 			</table>
 		</c:forEach>
-		<h4>total = $${total}</h4>
+		<table class="myRestaurant">
+			<tr>
+				<td>
+					<h1>total = $${total}</h1>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<!-- /container -->
 	<script

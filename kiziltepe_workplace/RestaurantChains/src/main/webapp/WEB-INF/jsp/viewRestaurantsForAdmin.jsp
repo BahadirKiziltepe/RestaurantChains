@@ -31,7 +31,7 @@
 					value="${_csrf.token}" />
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/profile?name=${pageContext.request.userPrincipal.name}">My
+				| <a href="/welcome">Home</a> | <a href="/profile?name=${pageContext.request.userPrincipal.name}">My
 					Account</a> | <a
 					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
 					Cart</a> |
@@ -43,9 +43,10 @@
 		</c:if>
 	</div>
 
-	<table>
+	<table class="tableDiv">
 		<tr>
-			<td><c:forEach var="restaurant" items="${restaurantList}">
+			<td><h2>Restaurants</h2>
+				<c:forEach var="restaurant" items="${restaurantList}">
 					<table>
 						<tr>
 							<td><form action="/admin/view_restaurant">
@@ -53,7 +54,9 @@
 										<tr>
 											<td><input type="hidden" name="name"
 												value="${restaurant.name}"></td>
-											<td><input type="submit" value="${restaurant.name}"></td>
+											<td><h3>
+													<input type="submit" value="${restaurant.name}">
+												</h3></td>
 										</tr>
 									</table>
 								</form></td>

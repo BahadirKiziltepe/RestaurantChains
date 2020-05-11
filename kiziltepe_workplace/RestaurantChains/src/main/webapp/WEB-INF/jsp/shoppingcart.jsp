@@ -29,7 +29,9 @@
 					value="${_csrf.token}" />
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
-				| <a href="/welcome">Home</a> | <a href="/profile?name=${pageContext.request.userPrincipal.name}">My Account</a> | 
+				| <a href="/welcome">Home</a> | <a
+					href="/profile?name=${pageContext.request.userPrincipal.name}">My
+					Account</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
 					<a href="${contextPath}/h2-console">CONSOLE</a> |
 				</c:if>
@@ -38,26 +40,40 @@
 		</c:if>
 	</div>
 
-	<div>
-	<h3>Shopping Cart</h3>
+	<div class="tableDiv">
+		<h2>Shopping Cart</h2>
 		<c:forEach var="item" items="${itemListUser}">
 			<table>
 				<tr>
 					<td>
-						<table>
-							<tr>
-								<td><h4>$${item.price} - ${item.name}, ${item.description}</h4></td>
-							</tr>
-						</table>
+						<form action="/shoppingcart/remove_item">
+							<table>
+								<tr>
+									<td><input type="hidden" name="id" value="${item.id}"></td>
+									<td><input type="hidden" name="name"
+										value="${pageContext.request.userPrincipal.name}"></td>
+									<td><h3>$${item.price} - ${item.name},
+											${item.description}</h3></td>
+									<td><input type="submit" value="Remove Item"></td>
+								</tr>
+							</table>
+						</form>
 					</td>
 				</tr>
 			</table>
 		</c:forEach>
-		<h4>total = $${total}</h4>
-		<form action="/checkout">
-		<input type="hidden" name="name" value="${pageContext.request.userPrincipal.name}">
-		<input type="submit" value="Checkout">
-		</form>
+		<table class="myRestaurant">
+			<tr>
+				<td>
+					<h2>total = $${total}</h2>
+					<form action="/checkout">
+						<h3><input type="hidden" name="name"
+							value="${pageContext.request.userPrincipal.name}"> <input
+							type="submit" value="Checkout"></h3>
+					</form>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<!-- /container -->
 	<script

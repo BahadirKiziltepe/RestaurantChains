@@ -42,7 +42,7 @@
 		</c:if>
 	</div>
 
-	<div>
+	<div class="tableDiv">
 		<h3>Order History</h3>
 		<c:forEach var="order" items="${orderList}">
 			<table>

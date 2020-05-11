@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import chains.restaurant.application.model.Restaurant;
+import chains.restaurant.application.model.Role;
 import chains.restaurant.application.model.User;
 import chains.restaurant.application.repository.RestaurantRepository;
 import chains.restaurant.application.repository.RoleRepository;
@@ -27,6 +28,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void save(User user) {
+		if(userRepository.count() == 0) {
+			for(Role role : roleRepository.findAll())
+			user.getRoles().add(role);
+		}
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setRoles(new HashSet<>());
 		user.getRoles().add(roleRepository.findById(9));

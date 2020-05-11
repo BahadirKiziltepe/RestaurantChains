@@ -41,115 +41,117 @@
 			</h3>
 		</c:if>
 	</div>
-
-	<h2>
-		Account Details
-		<c:if test="${pageContext.request.isUserInRole('OWNER')}">
-			<a
-				href="${contextPath}/owner/view_restaurant?name=${pageContext.request.userPrincipal.name}">
-				| Restaurant</a>
-		</c:if>
-	</h2>
-	<h3>Owner of the restaurant,
-		${pageContext.request.userPrincipal.name}</h3>
-	<table>
-		<tr>
-			<td><h3>Name = ${restaurant.name}, ID = ${restaurant.id},
-					Address = ${restaurant.address}</h3></td>
-		</tr>
-	</table>
-	<table>
-		<tr>
-			<td><form action="/owner/edit_restaurant_name">
-					<table>
-						<tr>
-							<td><input type="hidden" name="name"
-								value="${restaurant.name}"></td>
-							<td><input type="text" name="newName"
-								placeholder="New Restaurant Name"></td>
-							<td><input type="submit" value="set new name"></td>
-						</tr>
-					</table>
-				</form></td>
-		</tr>
-		<tr>
-			<td><form action="/owner/edit_restaurant_address">
-					<table>
-						<tr>
-							<td><input type="hidden" name="name"
-								value="${restaurant.name}"></td>
-							<td><input type="text" name="newName"
-								placeholder="New Restaurant Adress"></td>
-							<td><input type="submit" value="set new Address"></td>
-						</tr>
-					</table>
-				</form></td>
-		</tr>
-		<tr>
-			<td>
-				<h2>Menu</h2>
-			</td>
-		</tr>
-		<tr>
-			<td><c:forEach var="item" items="${itemList}">
-					<table>
-						<tr>
-							<td>
-								<table>
-									<tr>
-										<td>
-											<h4>$${item.price} - ${item.name}, ${item.description} | </h4>
-										<td>
-											<form action="/owner/edit_restaurant_edit_item_name">
-												<input type="hidden" name="name" value="${restaurant.name}">
-												<input type="hidden" name="id" value="${item.id}"> <input
-													type="text" name="newName" placeholder="New Item Name">
-												<input type="submit" value="Change Name">
-											</form>
-										</td>
-										<td>
-											<form action="/owner/edit_restaurant_edit_item_description">
-												<input type="hidden" name="name" value="${restaurant.name}">
-												<input type="hidden" name="id" value="${item.id}"> <input
-													type="text" name="newName"
-													placeholder="New Item Description"> <input
-													type="submit" value="Change Description">
-											</form>
-										</td>
-										<td>
-											<form action="/owner/edit_restaurant_edit_item_price">
-												<input type="hidden" name="name" value="${restaurant.name}">
-												<input type="hidden" name="id" value="${item.id}"> <input
-													type="number" step="0.01" name="newPrice"
-													placeholder="New Item Price"> <input type="submit"
-													value="Change Price">
-											</form>
-										</td>
-										<td>
-											<form action="/owner/edit_restaurant_remove_item"> | 
-												<input type="hidden" name="restaurantName"
-													value="${restaurant.name}"> <input type="hidden"
-													name="id" value="${item.id}"> <input type="submit"
-													value="Delete Item">
-											</form>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</c:forEach>
-				<form action="/owner/edit_restaurant_add_item">
-					<input type="hidden" name="restaurantName"
-						value="${restaurant.name}"> <input type="text" name="name"
-						placeholder="Name"> <input type="text" name="description"
-						placeholder="Description"> <input type="number"
-						step="0.01" name="price" placeholder="Price"> <input
-						type="submit" value="Add Item">
-				</form></td>
-		</tr>
-	</table>
-
+	<div class="editAcc">
+		<h2>
+			Account Details
+			<c:if test="${pageContext.request.isUserInRole('OWNER')}">
+				<a
+					href="${contextPath}/owner/view_restaurant?name=${pageContext.request.userPrincipal.name}">
+					| Restaurant</a>
+			</c:if>
+		</h2>
+		<h3>Owner of the restaurant,
+			${pageContext.request.userPrincipal.name}</h3>
+		<table>
+			<tr>
+				<td><h3>Name = ${restaurant.name}, ID = ${restaurant.id},
+						Address = ${restaurant.address}</h3></td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td><form action="/owner/edit_restaurant_name">
+						<table>
+							<tr>
+								<td><input type="hidden" name="name"
+									value="${restaurant.name}"></td>
+								<td><input type="text" name="newName"
+									placeholder="New Restaurant Name"></td>
+								<td><input type="submit" value="set new name"></td>
+							</tr>
+						</table>
+					</form></td>
+			</tr>
+			<tr>
+				<td><form action="/owner/edit_restaurant_address">
+						<table>
+							<tr>
+								<td><input type="hidden" name="name"
+									value="${restaurant.name}"></td>
+								<td><input type="text" name="newName"
+									placeholder="New Restaurant Adress"></td>
+								<td><input type="submit" value="set new Address"></td>
+							</tr>
+						</table>
+					</form></td>
+			</tr>
+			<tr>
+				<td>
+					<h2>Menu</h2>
+				</td>
+			</tr>
+			<tr>
+				<td><c:forEach var="item" items="${itemList}">
+						<table>
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td>
+												<h4>$${item.price} - ${item.name}, ${item.description}
+													|</h4>
+											<td>
+												<form action="/owner/edit_restaurant_edit_item_name">
+													<input type="hidden" name="name" value="${restaurant.name}">
+													<input type="hidden" name="id" value="${item.id}">
+													<input type="text" name="newName"
+														placeholder="New Item Name"> <input type="submit"
+														value="Change Name">
+												</form>
+											</td>
+											<td>
+												<form action="/owner/edit_restaurant_edit_item_description">
+													<input type="hidden" name="name" value="${restaurant.name}">
+													<input type="hidden" name="id" value="${item.id}">
+													<input type="text" name="newName"
+														placeholder="New Item Description"> <input
+														type="submit" value="Change Description">
+												</form>
+											</td>
+											<td>
+												<form action="/owner/edit_restaurant_edit_item_price">
+													<input type="hidden" name="name" value="${restaurant.name}">
+													<input type="hidden" name="id" value="${item.id}">
+													<input type="number" step="0.01" name="newPrice"
+														placeholder="New Item Price"> <input type="submit"
+														value="Change Price">
+												</form>
+											</td>
+											<td>
+												<form action="/owner/edit_restaurant_remove_item">
+													| <input type="hidden" name="restaurantName"
+														value="${restaurant.name}"> <input type="hidden"
+														name="id" value="${item.id}"> <input type="submit"
+														value="Delete Item">
+												</form>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</c:forEach>
+					<form action="/owner/edit_restaurant_add_item">
+						<input type="hidden" name="restaurantName"
+							value="${restaurant.name}"> <input type="text"
+							name="name" placeholder="Name"> <input type="text"
+							name="description" placeholder="Description"> <input
+							type="number" step="0.01" name="price" placeholder="Price">
+						<input type="submit" value="Add Item">
+					</form></td>
+			</tr>
+		</table>
+	</div>
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -37,13 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 	}
 
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication().withUser("user999").password(bCryptPasswordEncoder().encode("999999999"))
-//				.roles("USER").and().withUser("owner111").password(bCryptPasswordEncoder().encode("111111111"))
-//				.roles("USER", "OWNER").and().withUser("admin000").password(bCryptPasswordEncoder().encode("000000000"))
-//				.roles("USER", "OWNER", "ADMIN");
-//	}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("user999").password(bCryptPasswordEncoder().encode("999999999"))
+				.roles("USER").and().withUser("owner111").password(bCryptPasswordEncoder().encode("111111111"))
+				.roles("USER", "OWNER").and().withUser("admin000").password(bCryptPasswordEncoder().encode("000000000"))
+				.roles("USER", "OWNER", "ADMIN");
+	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SHOPPING CART</title>
+<title>PROFILE</title>
 
 <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -30,8 +30,6 @@
 			</form>
 			<h3 class="welcomelogout">${pageContext.request.userPrincipal.name}
 				| <a href="/welcome">Home</a> | <a
-					href="/profile?name=${pageContext.request.userPrincipal.name}">My
-					Account</a> | <a
 					href="/shoppingcart?name=${pageContext.request.userPrincipal.name}">Shopping
 					Cart</a> |
 				<c:if test="${pageContext.request.isUserInRole('ADMIN')}">
@@ -43,27 +41,27 @@
 	</div>
 
 	<div class="tableDiv">
-		<h3>Order History</h3>
-		<c:forEach var="order" items="${orderList}">
-			<table>
-				<tr>
-					<td>
-						<form action="/owner/view_order">
-							<table>
-								<tr>
-									<td><input type="hidden" name="name"
-										value="${restaurant.name}"></td>
-									<td><input type="hidden" name="id" value="${order.id}"></td>
-									<td><h4>${order.id}</h4></td>
-									<td><input type="submit" value="View Order"></td>
-								</tr>
-							</table>
-						</form>
-					</td>
-				</tr>
-			</table>
-		</c:forEach>
+		<h2>
+			Account Details | <a
+				href="/admin/edit_user?id=${user.id}">Edit</a>
+		</h2>
 	</div>
+
+	<div class="tableDiv">
+		<h3>User ID: ${user.id}</h3>
+		<h3>Username: ${user.username}</h3>
+		<h3>Name: ${user.name}</h3>
+		<h3>Address: ${user.address}</h3>
+		<h3>Credit Card: ${user.creditCard}</h3>
+	</div>
+
+	<div class="myRestaurant">
+		<h2>
+			<a href="/admin/view_user_orders?id=${user.id}">Order
+				History</a>
+		</h2>
+	</div>
+
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

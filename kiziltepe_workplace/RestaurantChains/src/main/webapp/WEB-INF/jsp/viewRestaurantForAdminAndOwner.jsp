@@ -43,48 +43,51 @@
 			</h3>
 		</c:if>
 	</div>
+	<div class="tableDiv">
+		<h2>
+			Restaurant Details
+			<c:if test="${pageContext.request.isUserInRole('OWNER')}">
+				<a
+					href="${contextPath}/owner/edit_restaurant?name=${restaurant.name}">
+					| Edit</a>
+			</c:if>
+		</h2>
+		<h3>Owner of the restaurant,
+			${pageContext.request.userPrincipal.name}</h3>
+		<table>
+			<tr>
 
-	<h2>
-		Restaurant Details
-		<c:if test="${pageContext.request.isUserInRole('OWNER')}">
-			<a
-				href="${contextPath}/owner/edit_restaurant?name=${restaurant.name}">
-				| Edit</a>
-		</c:if>
-	</h2>
-	<h3>Owner of the restaurant,
-		${pageContext.request.userPrincipal.name}</h3>
-	<table>
-		<tr>
-
-			<td><h3>Name = ${restaurant.name}, ID = ${restaurant.id},
-					Address = ${restaurant.address}</h3></td>
-		</tr>
-	</table>
-	<table>
-		<tr>
-			<td>
-				<h2>Menu | <a href="/owner/orders?name=${restaurant.name}">Order History</a></h2>
-			</td>
-		</tr>
-		<tr>
-			<td><c:forEach var="item" items="${itemList}">
-					<table>
-						<tr>
-							<td>
-								<table>
-									<tr>
-										<td>
-											<h4>$${item.price} - ${item.name}, ${item.description}</h4>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</c:forEach></td>
-		</tr>
-	</table>
-
+				<td><h3>Name = ${restaurant.name}, ID = ${restaurant.id},
+						Address = ${restaurant.address}</h3></td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td>
+					<h2>
+						Menu | <a href="/owner/orders?name=${restaurant.name}">Order
+							History</a>
+					</h2>
+				</td>
+			</tr>
+			<tr>
+				<td><c:forEach var="item" items="${itemList}">
+						<table>
+							<tr>
+								<td>
+									<table>
+										<tr>
+											<td>
+												<h4>$${item.price} - ${item.name}, ${item.description}</h4>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</c:forEach></td>
+			</tr>
+		</table>
+	</div>
 	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
