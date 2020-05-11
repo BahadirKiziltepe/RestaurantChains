@@ -28,12 +28,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void save(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setRoles(new HashSet<>());
 		if(userRepository.count() == 0) {
 			for(Role role : roleRepository.findAll())
 			user.getRoles().add(role);
 		}
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setRoles(new HashSet<>());
 		user.getRoles().add(roleRepository.findById(9));
 		user.setShoppingCart(new HashSet<>());
 		user.setOrders(new HashSet<>());
